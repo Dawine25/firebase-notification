@@ -1,0 +1,28 @@
+{
+  "name": "notifications",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --experimental-modules index.js"
+  },
+  "author": "victorin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "firebase-admin": "^12.2.0",
+    "nodemon": "^3.1.4"
+  },
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "index.js"
+    }
+  ]
+}
