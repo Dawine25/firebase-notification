@@ -1,15 +1,15 @@
-import express from 'express';
 import firebaseAdmin from 'firebase-admin';
-import serviceAccount from './config/getymoney-59ce1-firebase-adminsdk-lyijq-33cd6dfb6e.json' assert { type: 'json' };
+import express from 'express';
+import serviceAccount from "./config/getymoney-59ce1-firebase-adminsdk-lyijq-fc03c2b8cd.json" assert { type: 'json' };
 
-// Initialisez l'application Firebase
+
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(serviceAccount)
 });
 
 const app = express();
 app.use(express.json());
-
+//dj/
 app.post('/send-notification', async (req, res) => {
   const { token, title, body } = req.body;
 
