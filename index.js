@@ -1,6 +1,21 @@
 import firebaseAdmin from 'firebase-admin';
 import express from 'express';
-import serviceAccount from "./config/getymoney-59ce1-944760c5f21d.json" assert { type: 'json' };
+import { config } from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { createRequire } from 'module';
+
+// Créer une fonction require pour charger des modules CommonJS
+const require = createRequire(import.meta.url);
+
+// Charger les variables d'environnement à partir de .env
+config({ path: fileURLToPath(new URL('.env', import.meta.url)) });
+
+// Maintenant, vous pouvez utiliser process.env pour accéder aux variables d'environnement
+const serviceAccount = require(process.env.SERVICE_ACCOUNT_KEY_PATH);
+
+
+// import serviceAccount from process.env.SERVICE_ACCOUNT_KEY_PATH assert { type: 'json' };
 
 
 firebaseAdmin.initializeApp({
