@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 config({ path: fileURLToPath(new URL('.env', import.meta.url)) });
 
 // Maintenant, vous pouvez utiliser process.env pour accéder aux variables d'environnement
-const serviceAccount = require(process.env.SERVICE_ACCOUNT_KEY_PATH);
+const serviceAccount = require(process.env.key);
 
 
 // import serviceAccount from process.env.SERVICE_ACCOUNT_KEY_PATH assert { type: 'json' };
@@ -25,7 +25,7 @@ firebaseAdmin.initializeApp({
 const app = express();
 app.use(express.json());
 //dj/
-app.get('/send-notification', async (req, res) => {
+app.post('/send-notification', async (req, res) => {
   const { token, title, body } = req.body;
 
   const message = {
