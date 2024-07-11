@@ -10,7 +10,7 @@ firebaseAdmin.initializeApp({
 const app = express();
 app.use(express.json());
 //dj/
-app.post('/send-notification', async (req, res) => {
+app.get('/send-notification', async (req, res) => {
   const { token, title, body } = req.body;
 
   const message = {
