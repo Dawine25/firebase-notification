@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 config({ path: fileURLToPath(new URL('.env', import.meta.url)) });
 
 // Maintenant, vous pouvez utiliser process.env pour accéder aux variables d'environnement
-const serviceAccount = require(process.env.key);
+const serviceAccount = require(process.env.SERVICE_ACCOUNT_KEY_PATH);
 
 
 // import serviceAccount from process.env.SERVICE_ACCOUNT_KEY_PATH assert { type: 'json' };
