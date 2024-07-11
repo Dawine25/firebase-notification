@@ -1,6 +1,6 @@
 import firebaseAdmin from 'firebase-admin';
 import express from 'express';
-import serviceAccount from "./config/getymoney-59ce1-firebase-adminsdk-lyijq-fc03c2b8cd.json" assert { type: 'json' };
+import serviceAccount from "./config/getymoney-59ce1-f36ccee205ba.json" assert { type: 'json' };
 
 
 firebaseAdmin.initializeApp({
