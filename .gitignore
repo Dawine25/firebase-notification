@@ -2,4 +2,5 @@ node_modules/
 .vercel
 
 # Ignore les fichiers de configuration sensibles
-config/getymoney-59ce1-944760c5f21d.json
+.env
+config/service.json
