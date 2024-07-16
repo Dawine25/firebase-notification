@@ -4,6 +4,7 @@ import dotenv  from 'dotenv';
 import bodyParser from 'body-parser';
 import { readFile } from 'fs/promises';
 dotenv.config();
+
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
@@ -27,6 +28,7 @@ async function initializeFirebase() {
 }
 
 initializeFirebase();
+const firestore =firebaseAdmin.firestore();
 app.post('/send-notification', async (req, res) => {
   const { token, title, body } = req.body;
 
@@ -101,6 +103,80 @@ app.post('/deleteUser', async (req, res) => {
     res.status(500).send(`Erreur lors de la suppression de l'utilisateur: ${error}`);
   }
 });
+
+app.get('/checkPlayerName/:name', async (req, res) => {
+  const { name } = req.params;
+  
+
+  try {
+    const querySnapshot = await firestore.collection('User').where('username', '==', name).get();
+
+    if (!querySnapshot.empty) {
+      res.status(200).json({ exists: true });
+    } else {
+      res.status(200).json({ exists: false });
+    }
+    
+  } catch (error) {
+    console.error('Erreur lors de la vérification du nom:', error);
+    res.status(500).json({ error: 'Erreur lors de la vérification du nom' });
+  }
+});
+
+app.get('/checkPlayerNumber/:number', async (req, res) => {
+  const { number } = req.params;
+  
+
+  try {
+    const querySnapshot = await firestore.collection('User').where('number', '==', number).get();
+
+    if (!querySnapshot.empty) {
+      res.status(200).json({ exists: true });
+    } else {
+      res.status(200).json({ exists: false });
+    }
+    
+  } catch (error) {
+    console.error('Erreur lors de la vérification du numero:', error);
+    res.status(500).json({ error: 'Erreur lors de la vérification du numero' });
+  }
+});
+
+
+app.get('/checkCoachName/:name', async (req, res) => {
+  const { name } = req.params;
+
+  try {
+    const querySnapshot = await firestore.collection('coach').where('username', '==', name).get();
+
+    if (!querySnapshot.empty) {
+      res.status(200).json({ exists: true });
+    } else {
+      res.status(200).json({ exists: false });
+    }
+  } catch (error) {
+    console.error('Erreur lors de la vérification du nom:', error);
+    res.status(500).json({ error: 'Erreur lors de la vérification du nom' });
+  }
+});
+
+app.get('/checkCoachNumber/:number', async (req, res) => {
+  const { number } = req.params;
+
+  try {
+    const querySnapshot = await firestore.collection('coach').where('number', '==', number).get();
+
+    if (!querySnapshot.empty) {
+      res.status(200).json({ exists: true });
+    } else {
+      res.status(200).json({ exists: false });
+    }
+  } catch (error) {
+    console.error('Erreur lors de la vérification du nom:', error);
+    res.status(500).json({ error: 'Erreur lors de la vérification du nom' });
+  }
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
