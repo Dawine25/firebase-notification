@@ -22,7 +22,7 @@ async function initializeFirebase() {
   const serviceAccount = JSON.parse(serviceAccountJson);
 
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: firebaseAdmin.credential.cert(serviceAccount),
   });
 }
 
