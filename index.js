@@ -21,7 +21,7 @@ async function initializeFirebase() {
   const serviceAccountJson = Buffer.from(serviceAccountBase64, 'base64').toString('utf8');
   const serviceAccount = JSON.parse(serviceAccountJson);
 
-  admin.initializeApp({
+  firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(serviceAccount),
   });
 }
