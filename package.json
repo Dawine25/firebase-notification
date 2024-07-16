@@ -5,11 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-   "start": "nodemon --experimental-modules index.js"
+    "start": "nodemon --experimental-modules index.js"
   },
   "author": "victorin",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "firebase-admin": "^12.2.0",

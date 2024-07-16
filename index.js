@@ -3,11 +3,13 @@ import express from 'express';
 import dotenv  from 'dotenv';
 import bodyParser from 'body-parser';
 import { readFile } from 'fs/promises';
+import cors from 'cors'
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cors());
 // const serviceAccountPath = process.env.SERVICE_ACCOUNT_KEY_PATH;
 // const serviceAccount = JSON.parse(
 //   await readFile(new URL(serviceAccountPath, import.meta.url))
