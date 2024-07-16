@@ -7,17 +7,26 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
-const serviceAccountPath = process.env.SERVICE_ACCOUNT_KEY_PATH;
-const serviceAccount = JSON.parse(
-  await readFile(new URL(serviceAccountPath, import.meta.url))
-);
+// const serviceAccountPath = process.env.SERVICE_ACCOUNT_KEY_PATH;
+// const serviceAccount = JSON.parse(
+//   await readFile(new URL(serviceAccountPath, import.meta.url))
+// );
 
-firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(serviceAccount)
-});
+// firebaseAdmin.initializeApp({
+//   credential: firebaseAdmin.credential.cert(serviceAccount)
+// });
 
+async function initializeFirebase() {
+  const serviceAccountBase64 = process.env.SERVICE_ACCOUNT_KEY_PATH;
+  const serviceAccountJson = Buffer.from(serviceAccountBase64, 'base64').toString('utf8');
+  const serviceAccount = JSON.parse(serviceAccountJson);
 
-//dj/
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
+
+initializeFirebase();
 app.post('/send-notification', async (req, res) => {
   const { token, title, body } = req.body;
 
